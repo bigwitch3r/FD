@@ -3,4 +3,31 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="age_hint">20</string>
+    <string name="height_hint">180</string>
+    <string name="weight_hint">60</string>
+
+    <string name="welcome">Пожалуйста, введите данные о себе для точного расчёта КБЖУ</string>
+    <string name="age">Возраст</string>
+    <string name="gender">Пол</string>
+    <string name="male">Мужской</string>
+    <string name="female">Женский</string>
+    <string name="activity">Образ жизни</string>
+    <string name="goal">Цель</string>
+    <string name="lose">Похудеть</string>
+    <string name="save">Поддерживать форму</string>
+    <string name="gain">Набрать вес</string>
+    <string name="height">Рост</string>
+    <string name="weight">Вес</string>
+    <string name="passive">Сидячий</string>
+    <string name="two_times">2 тренировки в неделю</string>
+    <string name="four_five_times">4-5 тренировок в неделю или активная работа</string>
+    <string name="six_times">6 тренировок в неделю</string>
+    <string name="everyday">Каждодневный тренинг</string>
+    <string name="twice_a_day">2 тренировки в день</string>
+    <string name="hard">Высокоинтенсивные тренировки или тяжёлый физический труд</string>
+
+    <string name="calculate">Рассчитать КБЖУ</string>
+
 </resources>
