@@ -29,5 +29,25 @@
     <string name="hard">Высокоинтенсивные тренировки или тяжёлый физический труд</string>
 
     <string name="calculate">Рассчитать КБЖУ</string>
+    <string name="add_a_dish">Добавить</string>
+
+    <string name="add">Добавить</string>
+    <string name="add_welcome">Пожалуйста, введите название блюда, а также информацию о его энергетической ценности в 100 граммах.</string>
+    <string name="dish">Название</string>
+    <string name="cal">Энергетическая ценность (ккал)</string>
+    <string name="pro">Белки</string>
+    <string name="fat">Жиры</string>
+    <string name="carb">Углеводы</string>
+
+    <string name="dish_name_hint">Рожки сдобные (Магнит)</string>
+    <string name="cal_hint">360</string>
+    <string name="pro_hint">6.5</string>
+    <string name="fat_hint">10</string>
+    <string name="carb_hint">47</string>
+
+    <string name="db_info">Database Info</string>
+    <string name="db_drop">Удалить по ID</string>
+    <string name="db_drop_hint">1</string>
+    <string name="drop_by_id">Удалить</string>
 
 </resources>
