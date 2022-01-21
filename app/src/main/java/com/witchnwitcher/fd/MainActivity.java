@@ -1,14 +1,12 @@
 package com.witchnwitcher.fd;
 
-import android.app.ActionBar;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,20 +18,24 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.witchnwitcher.fd.data.DishesContract;
+import com.witchnwitcher.fd.data.NormsContract;
+import com.witchnwitcher.fd.data.NormsDbHelper;
 import com.witchnwitcher.fd.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private NormsDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mDbHelper = new NormsDbHelper(this);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -44,9 +46,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
     }
 
     public void calculateCPFC(View view) {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Layout initialization
         LinearLayout layout = (LinearLayout) this.findViewById(R.id.scroll_layout);
@@ -187,6 +191,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Вы не выбрали пол", Toast.LENGTH_LONG).show();
                     break;
             }
+
+            ContentValues values = new ContentValues();
+            values.put(NormsContract.Norm.COLUMN_CALORIES, calories);
+            values.put(NormsContract.Norm.COLUMN_PROTEINS, proteins);
+            values.put(NormsContract.Norm.COLUMN_FATS, fats);
+            values.put(NormsContract.Norm.COLUMN_CARBOHYDRATES, carbohydrates);
+
+            long newRowId = db.insert(NormsContract.Norm.TABLE_NAME, null, values);
         }
         else
         {

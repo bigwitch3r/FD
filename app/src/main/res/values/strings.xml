@@ -46,6 +46,7 @@
     <string name="carb_hint">47</string>
 
     <string name="db_info">Database Info</string>
+    <string name="norms_info">Norms Database Info</string>
     <string name="db_drop">Удалить по ID</string>
     <string name="db_drop_hint">1</string>
     <string name="drop_by_id">Удалить</string>
