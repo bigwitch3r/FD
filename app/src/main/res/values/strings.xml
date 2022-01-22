@@ -46,9 +46,15 @@
     <string name="carb_hint">47</string>
 
     <string name="db_info">Database Info</string>
-    <string name="norms_info">Norms Database Info</string>
+    <string name="norms_info">Ваша суточная норма КБЖУ</string>
+    <string name="norms_prog">Ваш текущий прогресс:</string>
+    <string name="added_dishes">Вы сегодня съели:</string>
+    <string name="day_dish">Введите ID блюда из списка, а также его количество в граммах</string>
     <string name="db_drop">Удалить по ID</string>
+
     <string name="db_drop_hint">1</string>
     <string name="drop_by_id">Удалить</string>
+    <string name="id_hint">ID</string>
+    <string name="amount_hint">Количество в граммах</string>
 
 </resources>

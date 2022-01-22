@@ -1,6 +1,7 @@
 package com.witchnwitcher.fd;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private NormsDbHelper mDbHelper;
+    private NormsDbHelper checkDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mDbHelper = new NormsDbHelper(this);
+        checkDbHelper = new NormsDbHelper(this);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculateCPFC(View view) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
+        SQLiteDatabase checkDb = checkDbHelper.getReadableDatabase();
         // Layout initialization
         LinearLayout layout = (LinearLayout) this.findViewById(R.id.scroll_layout);
         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -192,13 +195,41 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
+            String[] projection = {
+                    DishesContract.Dish._ID,
+                    NormsContract.Norm.COLUMN_CALORIES,
+                    NormsContract.Norm.COLUMN_PROTEINS,
+                    NormsContract.Norm.COLUMN_FATS,
+                    NormsContract.Norm.COLUMN_CARBOHYDRATES
+            };
+
+            Cursor cursor = checkDb.query(
+                    NormsContract.Norm.TABLE_NAME,   // таблица
+                    projection,            // столбцы
+                    null,                  // столбцы для условия WHERE
+                    null,                  // значения для условия WHERE
+                    null,                  // Don't group the rows
+                    null,                  // Don't filter by row groups
+                    null);                   // порядок сортировки
+
             ContentValues values = new ContentValues();
             values.put(NormsContract.Norm.COLUMN_CALORIES, calories);
             values.put(NormsContract.Norm.COLUMN_PROTEINS, proteins);
             values.put(NormsContract.Norm.COLUMN_FATS, fats);
             values.put(NormsContract.Norm.COLUMN_CARBOHYDRATES, carbohydrates);
 
-            long newRowId = db.insert(NormsContract.Norm.TABLE_NAME, null, values);
+            if (cursor.getCount() == 0)
+            {
+                long newRowId = db.insert(NormsContract.Norm.TABLE_NAME, null, values);
+                Toast.makeText(getBaseContext(), "Расчеты добавлены", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                String whereClause = "_id = ?";
+                String whereArgs[] = { "1" };
+                long newRowId = db.update(NormsContract.Norm.TABLE_NAME, values, whereClause, whereArgs);
+                Toast.makeText(getBaseContext(), "Расчеты обновлены", Toast.LENGTH_LONG).show();
+            }
         }
         else
         {
