@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">FD</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Прогресс</string>
+    <string name="title_dashboard">Блюда</string>
+    <string name="title_notifications">Калькулятор КБЖУ</string>
 
     <string name="age_hint">20</string>
     <string name="height_hint">180</string>
